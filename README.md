@@ -6,13 +6,14 @@ compiled build Fastfetch for some weird OS linux so you can run on your TV, ROUT
 
 - REQ: LINUX (VM/WSL/REAL), INTERNET,TERMINAL
 
-Package:
+Packages:
 
 ```bash
 sudo apt install build-essential clang make git 
 sudo add-apt-repository universe
 sudo apt update
-sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf 
+sudo apt install gcc-multilib g++-multilib
 ```
 
 optional with APT-fast (replace apt➡️APT FAST)/ Inclease downlaod speed x8
@@ -25,6 +26,36 @@ sudo apt install apt-fast
 ```
 
 Optional: CHATGPT,CLAUDE,COPILOT for quick helps
+
+How to copy to device
+
+run via SCP(ssh):
+
+```bash
+scp builds_you_want_besure_tobe_in_thesamedirectory user@ip:/path/you/want/
+```
+
+Device with CURL/WGET and INTERNET
+
+```bash
+curl -Lo fastfetch https://raw.githubusercontent.com/wikiepeidia/fastfetch-precomplied-builds/main/builds/buildsyouwant
+chmod +x fastfetch
+./fastfetch
+```
+
+```bash
+wget -O fastfetch https://raw.githubusercontent.com/wikiepeidia/fastfetch-precomplied-builds/main/builds/buildsyouwant
+chmod +x fastfetch
+./fastfetch
+```
+
+Normal devices, be sure to change APT to other package manager if you use different OS
+
+```bash
+sudo apt update
+sudo apt install fastfetch
+fastfetch
+```
 
 ## ARM32 build
 
@@ -72,4 +103,55 @@ cmake .. \
 make 
 ```
 
-![WebOS Screenshot](webos.png)
+![WebOS Screenshot](images/webos.png)
+
+## 86,64 builds
+
+- file : `fastfetch32or64` will be able to run on any 86 OR 64 bit linux. It is a 32bit binary
+- practical: for any devices couldnt use this command due to password issues or packages issues etc.
+
+```bash
+sudo apt install fastfetch
+```
+
+- REQ: 86/64 linux, internet, CURL,WGET.
+
+### how to run
+
+```bash
+chmod +x fastfetch32or64
+./fastfetch32or64
+```
+
+### how to biuld
+
+- RUN and build
+
+```bash
+cmake .. \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=x86 \
+  -DCMAKE_C_COMPILER=gcc \
+  -DCMAKE_C_FLAGS="-m32" \
+  -DCMAKE_EXE_LINKER_FLAGS="-static" \
+  -DENABLE_IMAGEMAGICK=OFF \
+  -DENABLE_RPM=OFF \
+  -DENABLE_SQLITE3=OFF \
+  -DENABLE_DBUS=OFF \
+  -DENABLE_DCONF=OFF \
+  -DENABLE_VULKAN=OFF \
+  -DENABLE_X11=OFF \
+  -DENABLE_WAYLAND=OFF \
+  -DENABLE_OPENCL=OFF \
+  -DENABLE_GLX=OFF \
+  -DENABLE_EGL=OFF \
+  -DENABLE_PULSE=OFF \
+  -DENABLE_DDCUTIL=OFF \
+  -DENABLE_DIRECTX_HEADERS=OFF \
+  -DENABLE_ELF=OFF \
+  -DENABLE_CHAFA=OFF
+
+make -j$(nproc)
+```
+
+![WebOS Screenshot](images/gdb.png)
