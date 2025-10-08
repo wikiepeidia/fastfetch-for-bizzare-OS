@@ -27,7 +27,15 @@ sudo apt install apt-fast
 
 Optional: CHATGPT,CLAUDE,COPILOT for quick helps
 
-How to copy to device
+## common device req to run fastfetch
+
+- LINUX
+- Accessible to shell
+- ability to dump this fastfetch file into the OS
+- CPU: pentium MMX(unsure), any ARM32
+-
+
+## How to copy to device
 
 run via SCP(ssh):
 
@@ -49,7 +57,7 @@ chmod +x fastfetch
 ./fastfetch
 ```
 
-Normal devices, be sure to change APT to other package manager if you use different OS
+Normal devices if package manager work, be sure to change APT to other package manager if you use different OS
 
 ```bash
 sudo apt update
@@ -155,3 +163,4 @@ make -j$(nproc)
 ```
 
 ![WebOS Screenshot](images/gdb.png)
+![WebOS Screenshot](images/jslinux.png)
